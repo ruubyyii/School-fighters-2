@@ -1,5 +1,5 @@
 <template>
-    <section class="h-screen bg-[url('../assets/img/fondo.png')] bg-no-repeat bg-cover items-center flex flex-col bg-center justify-center">
+    <section class=" landscape:bg-black h-screen bg-[url('../assets/img/fondo.png')] bg-no-repeat bg-cover items-center flex flex-col bg-center justify-center">
         <h1 class="text-white font-bold text-center text-5xl p-2">SCHOOL FIGHTER 2</h1>
         <p class="w-[60%] text-center text-white p-5">El mejor juego entre alumnos . Selecciona los alumnos que van a darse de hostias.</p>
         <div class="flex justify-center w-full items-center gap-6">
@@ -29,6 +29,8 @@ export default {
             personajes: personajes, 
             personaje1: "",
             personaje2: "", 
+            arrayPersonajes: [],
+            numeroPeleas: 0
         };
     },
     setup() {
@@ -51,6 +53,17 @@ export default {
                 this.toast.error("Porfavor selecciona ambos personajes.");
             }
             else{
+                const combatesGuardados =
+                    JSON.parse(localStorage.getItem("combate")) || [];
+
+                const nuevoCombate = {
+                    pj1: this.personaje1,
+                    pj2: this.personaje2,
+                };
+
+                combatesGuardados.push(nuevoCombate);
+
+                localStorage.setItem("combate", JSON.stringify(combatesGuardados));
                 this.$router.push('/escenarios')
             }
         },

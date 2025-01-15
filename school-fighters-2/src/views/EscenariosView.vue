@@ -1,5 +1,5 @@
 <template>
-    <section class="h-screen bg-[url('../assets/img/fondo.png')] bg-no-repeat bg-cover items-center flex flex-col bg-center justify-center">
+    <section class="landscape:bg-black h-screen bg-[url('../assets/img/fondo.png')] bg-no-repeat bg-cover items-center flex flex-col bg-center justify-center">
         <h1 class="text-white font-bold text-center text-5xl p-2">SCHOOL FIGHTER 2</h1>
         <p class="w-[60%] text-center text-white p-5">El mejor juego de lucha entre alumnos. Selecciona el escenario que más te guste.</p>
         <div class="flex justify-center w-full items-center gap-6">
