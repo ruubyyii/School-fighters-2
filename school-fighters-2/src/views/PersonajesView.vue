@@ -5,32 +5,62 @@
         <div class="flex justify-center w-full items-center gap-6">
             <select v-model="personaje1" class="bg-white border border-gray-300 rounded-lg text-sm focus:ring-blue-500 block w-1/3 p-2.5" name="" id="">.
                 <option value="" disabled>Elige un alumno</option>
-                <option v-for="(personaje, index) in personajes" :key="index" value="index">{{ personaje.nombre }}</option>
+                <option v-for="(personaje, index) in ordenarPersonajes()" :key="index" :value="personaje.nombre">{{ personaje.nombre }}</option>
             </select>
             <select v-model="personaje2" class="bg-white border border-gray-300 rounded-lg text-sm focus:ring-blue-500 block w-1/3 p-2.5" name="" id="">
                 <option value="" disabled class="">Elige un alumno</option>
-                <option v-for="(personaje, index) in personajes" :key="index" value="index">{{ personaje.nombre }}</option>
+                <option v-for="(personaje, index) in ordenarPersonajes()" :key="index" :value="personaje.nombre">{{ personaje.nombre }}</option>
             </select>
         </div>
         <div class=" flex justify-center my-5">
-            <button @click="$router.push('/escenarios')" class="bg-[#3dbc1e] text-white px-4 py-2 rounded font-bold">Elegir</button>
+            <button @click="continuar" class="bg-[#3dbc1e] text-white px-4 py-2 rounded font-bold">Elegir</button>
         </div>
     </section>
 </template>
 
 <script>
-import {personajes} from '@/db/db.js'
+import { useToast } from "vue-toastification";
+import { personajes } from "@/db/db.js";
+
 export default {
-    name: 'PersonajesView',
+    name: "PersonajesView",
     data() {
         return {
-            personajes: personajes,
-            personaje1: '',
-            personaje2: ''
+            personajes: personajes, 
+            personaje1: "",
+            personaje2: "", 
+        };
+    },
+    setup() {
+        const toast = useToast();
+        return { toast };
+    },
+    watch:{
+        personaje1(newValue){
+            this.toast.info(`El personaje 1 seleccionado ahora es ${newValue}`);
+            console.log('El personaje 1 ahora es',newValue);
+        },
+        personaje2(newValue){
+            this.toast.info(`El personaje 2 seleccionado ahora es ${newValue}`);
+            console.log('El personaje 2 ahora es',newValue);
         }
     },
-}
+    methods: {
+        continuar() {
+            if (!this.personaje1 || !this.personaje2) {
+                this.toast.error("Porfavor selecciona ambos personajes.");
+            }
+            else{
+                this.$router.push('/escenarios')
+            }
+        },
+        ordenarPersonajes() {
+            return personajes.slice().sort((a, b) => a.nombre.localeCompare(b.nombre));
+        }
+    },
+};
 </script>
+
 
 <style lang="sass" scoped>
 

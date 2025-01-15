@@ -10,11 +10,11 @@ export const personajes = [
 ]
 export const escenarios = [
     {
-        nombre: 'escenario1',
-        imagen: '../assets/combate.gif',
+        nombre: 'Cuarto de Baño',
+        imagen: '../assets/img/cuarto_de_baño.png',
     },
     {
-        nombre: 'escenario2',
-        imagen: '../assets/combate.gif',
+        nombre: 'Parque de Bolas',
+        imagen: '../assets/img/parque_de_bolas.webp'
     }
 ]
